@@ -4,8 +4,6 @@ from utils import messages
 class LinearRegression:
     """Class to linear regression algorithms"""
 
-    print("Aqui")
-
     def __init__(self):
         self.msg = messages.Messages()
 
