@@ -21,14 +21,14 @@ class TestLinearRegression:
         self.y = self.y_0 + self.eta
 
     # Tests for the linear regression method using the normal equation
-    # approach
-    def test_linear_regression_empty_input_output(self):
+    # approach to estimate the parameters
+    def test_linear_regression_normal_equation_empty_input_output(self):
         x = np.array([])
         y = np.array([1,2,3,4,5,6])
         with pytest.raises(Exception, match=self.msg.EMPTY_ARRAY):
             self.linear_regression.normal_equation(x, y)
 
-    def test_linear_regression_different_size_arrays(self):
+    def test_linear_regression_normal_equation_different_size_arrays(self):
         x = np.array([1,2,3,4,5,6])
         y = np.array([1,2,3])
         with pytest.raises(Exception, match=self.msg.DIFFERENT_SIZE):
