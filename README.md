@@ -1,3 +1,5 @@
+![workflow status](https://github.com/cristianesgarcia/machine_learning/actions/workflows/python-app.yml/badge.svg)
+
 # Machine Learning
 
 ## Introduction
