@@ -1,14 +1,27 @@
 import pytest
 import numpy as np
 
-from supervised_learning.linear_regression import linear_regression
+from main.supervised_learning.linear_regression import linear_regression
 from utils import messages
 
 class TestLinearRegression:
     def setup(self):
         self.linear_regression = linear_regression.LinearRegression()
         self.msg = messages.Messages()
+        self.number_of_samples = 100
+        self.parameters = np.array([[4.0],[3.0]])
+        self.threshold = 5e-1
+        # input data
+        self.x = 2*np.random.rand(self.number_of_samples,1)
+        # noiseless output data
+        self.y_0 = self.parameters[1]*self.x + self.parameters[0]
+        # noise signal
+        self.eta = np.random.rand(self.number_of_samples,1)
+        # output signal affected by noise
+        self.y = self.y_0 + self.eta
 
+    # Tests for the linear regression method using the normal equation
+    # approach
     def test_linear_regression_empty_input_output(self):
         x = np.array([])
         y = np.array([1,2,3,4,5,6])
@@ -22,16 +35,13 @@ class TestLinearRegression:
             self.linear_regression.normal_equation(x, y)
 
     def test_linear_regression_normal_equation_no_noise(self):
-        x = 2*np.random.rand(100,1)
-        y = 4 + 3*x
-        parameters = np.array([[4.0],[3.0]])
-        parameters_estimated = self.linear_regression.normal_equation(x, y)
-        assert parameters == pytest.approx(parameters_estimated, rel=1e-3)
+        parameters_estimated = self.linear_regression.normal_equation(
+            self.x, self.y)
+        assert self.parameters == pytest.approx(parameters_estimated,
+            rel=self.threshold)
     
-    def test_linear_regression_normal_equation(self):
-        x = 2*np.random.rand(100,1)
-        eta = np.random.rand(100,1)
-        y = 4 + 3*x + eta
-        parameters = np.array([[4.0],[3.0]])
-        parameters_estimated = self.linear_regression.normal_equation(x, y)
-        assert parameters == pytest.approx(parameters_estimated, rel=5e-1)
+    def test_linear_regression_normal_equation(self):        
+        parameters_estimated = self.linear_regression.normal_equation(
+            self.x, self.y)
+        assert self.parameters == pytest.approx(parameters_estimated,
+            rel=self.threshold)

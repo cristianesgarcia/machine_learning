@@ -11,8 +11,16 @@ The ML algorithms can be categorized into three main groups: *supervised* learni
 ## Implemented algorithms
 
 ### Supervised learning
+Supervised learning involves modeling the relationship between measured features of data and some label associated with the data.
+In other words, the algorithm receives pairs of inputs and desired outputs and finds a way to produce the desired output given an input.
+Implemented methods:
+
+- Linear regression
+
 
 ## Tests
+
+The unit tests were developed using the PyTest library.
 
 ## Project's organization
 
