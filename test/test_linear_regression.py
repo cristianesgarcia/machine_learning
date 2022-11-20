@@ -36,12 +36,38 @@ class TestLinearRegression:
 
     def test_linear_regression_normal_equation_no_noise(self):
         parameters_estimated = self.linear_regression.normal_equation(
-            self.x, self.y)
+            self.x, self.y_0)
         assert self.parameters == pytest.approx(parameters_estimated,
             rel=self.threshold)
     
     def test_linear_regression_normal_equation(self):        
         parameters_estimated = self.linear_regression.normal_equation(
+            self.x, self.y)
+        assert self.parameters == pytest.approx(parameters_estimated,
+            rel=self.threshold)
+    
+    # Tests for the linear regression method using the sckikit-learn 
+    # library
+    def test_linear_regression_empty_input_output(self):
+        x = np.array([])
+        y = np.array([])
+        with pytest.raises(Exception, match=self.msg.EMPTY_ARRAY):
+            self.linear_regression.linear_regression(x, y)
+    
+    def test_linear_regression_different_size_arrays(self):
+        x = np.array([1,2,3,4,5,6])
+        y = np.array([1,2,3])
+        with pytest.raises(Exception, match=self.msg.DIFFERENT_SIZE):
+            self.linear_regression.linear_regression(x, y)
+
+    def test_linear_regression_no_noise(self):
+        parameters_estimated = self.linear_regression.linear_regression(
+            self.x, self.y_0)
+        assert self.parameters == pytest.approx(parameters_estimated,
+            rel=self.threshold)
+
+    def test_linear_regression(self):
+        parameters_estimated = self.linear_regression.linear_regression(
             self.x, self.y)
         assert self.parameters == pytest.approx(parameters_estimated,
             rel=self.threshold)
