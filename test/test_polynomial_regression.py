@@ -1,5 +1,7 @@
 import pytest
 import numpy as np
+from random import seed
+from random import gauss
 
 from main.supervised_learning.polynomial_regression import polynomial_regression
 from utils import messages
@@ -17,7 +19,8 @@ class TestPolynomialRegression:
         # input data
         self.x = 6*np.random.rand(self.number_of_samples, 1) - 3
         # white gaussian noise with zero mean and variance equals one
-        self.noise = np.random.rand(self.number_of_samples, 1)
+        seed(1234)
+        self.noise = [gauss(0.0, 1.0) for i in range(self.number_of_samples)]
         # noiseless output
         self.y_0 = np.zeros(self.number_of_samples)
         self.y_0 = self.y_0.reshape((self.number_of_samples,1))
