@@ -1,1 +1,4 @@
-*.pyc 
+*.pyc
+/main/applications/application_env/
+/study/
+/main/applications/
