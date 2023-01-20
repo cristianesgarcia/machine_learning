@@ -21,6 +21,8 @@ class TestPolynomialRegression:
         # white gaussian noise with zero mean and variance equals one
         seed(1234)
         self.noise = [gauss(0.0, 1.0) for i in range(self.number_of_samples)]
+        self.noise = np.array(self.noise)
+        self.noise = self.noise.reshape((self.number_of_samples,1))
         # noiseless output
         self.y_0 = np.zeros(self.number_of_samples)
         self.y_0 = self.y_0.reshape((self.number_of_samples,1))
@@ -29,6 +31,7 @@ class TestPolynomialRegression:
                 self.desired_parameters[index]*self.x**(self.degree-index)
         # output affected by noise
         self.y = self.y_0 + self.noise
+        print(self.noise)
 
     def test_empty_input(self):
         x = np.array([])
